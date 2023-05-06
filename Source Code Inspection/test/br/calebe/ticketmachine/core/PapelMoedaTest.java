@@ -29,17 +29,5 @@ public class PapelMoedaTest {
         assertEquals(10, papelMoeda.getQuantidade());
     }
     
-    /*
-    @Test
-    public void testGetQuantidade() {
-        System.out.println("getQuantidade");
-        PapelMoeda instance = null;
-        int expResult = 0;
-        int result = instance.getQuantidade();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    */
     
 }

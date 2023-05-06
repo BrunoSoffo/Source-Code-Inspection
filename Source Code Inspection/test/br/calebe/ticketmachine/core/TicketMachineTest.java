@@ -17,64 +17,45 @@ import static org.junit.Assert.*;
  */
 public class TicketMachineTest {
     
-    public TicketMachineTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+    private TicketMachine tm;
+
     @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+    public void inicializarTicketMachine() {
+        tm = new TicketMachine(10);
     }
 
-    /**
-     * Test of inserir method, of class TicketMachine.
-     */
     @Test
-    public void testInserir() throws Exception {
-        System.out.println("inserir");
-        int quantia = 0;
-        TicketMachine instance = null;
-        instance.inserir(quantia);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testarInsercaoDePapelMoedaValido() throws PapelMoedaInvalidaException {
+        tm.inserir(10);
+        assertEquals(10, tm.getSaldo());
     }
 
-    /**
-     * Test of getSaldo method, of class TicketMachine.
-     */
     @Test
-    public void testGetSaldo() {
-        System.out.println("getSaldo");
-        TicketMachine instance = null;
-        int expResult = 0;
-        int result = instance.getSaldo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testarInsercaoDePapelMoedaInvalido() {
+        try {
+            tm.inserir(7);
+            fail("Deveria ter lançado uma exceção de papel moeda inválido");
+        } catch (PapelMoedaInvalidaException e) {
+            assertEquals(0, tm.getSaldo());
+        }
     }
 
-    /**
-     * Test of imprimir method, of class TicketMachine.
-     */
     @Test
-    public void testImprimir() throws Exception {
-        System.out.println("imprimir");
-        TicketMachine instance = null;
-        String expResult = "";
-        String result = instance.imprimir();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testarImpressaoComSaldoInsuficiente() {
+        try {
+            tm.imprimir();
+            fail("Deveria ter lançado uma exceção de saldo insuficiente");
+        } catch (SaldoInsuficienteException) {
+            assertEquals(0, tm.getSaldo());
+        }
+    }
+
+    @Test
+    public void testarImpressaoComSaldoSuficiente() throws PapelMoedaInvalidaException, SaldoInsuficienteException {
+        tm.inserir(10);
+        tm.inserir(20);
+        assertEquals("*** R$ 30,00 ****\n", tm.imprimir());
+        assertEquals(30, tm.getSaldo());
     }
     
 }
