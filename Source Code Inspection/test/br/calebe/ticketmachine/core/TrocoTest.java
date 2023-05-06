@@ -4,6 +4,7 @@
  */
 package br.calebe.ticketmachine.core;
 
+import java.util.Iterator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,31 +16,39 @@ import static org.junit.Assert.*;
  *
  * @author unifbsoffo
  */
-public class PapelMoedaTest {
+public class TrocoTest {
     
-    @Test
-    public void testGetValor() {
-        PapelMoeda papelMoeda = new PapelMoeda(5, 10);
-        assertEquals(5, papelMoeda.getValor());
+    public TrocoTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
     }
 
+    /**
+     * Test of getIterator method, of class Troco.
+     */
     @Test
-    public void testGetQuantidade() {
-        PapelMoeda papelMoeda = new PapelMoeda(5, 10);
-        assertEquals(10, papelMoeda.getQuantidade());
-    }
-    
-    /*
-    @Test
-    public void testGetQuantidade() {
-        System.out.println("getQuantidade");
-        PapelMoeda instance = null;
-        int expResult = 0;
-        int result = instance.getQuantidade();
+    public void testGetIterator() {
+        System.out.println("getIterator");
+        Troco instance = null;
+        Iterator<PapelMoeda> expResult = null;
+        Iterator<PapelMoeda> result = instance.getIterator();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    */
     
 }
