@@ -1,54 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package br.calebe.ticketmachine.core;
 
-import java.util.Iterator;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author unifbsoffo
- */
+import java.util.Iterator;
+
+import org.junit.Before;
+import org.junit.Test;
+
 public class TrocoTest {
-    
-    public TrocoTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
+    private Troco troco;
+
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        troco = new Troco(137);
     }
 
-    /**
-     * Test of getIterator method, of class Troco.
-     */
     @Test
     public void testGetIterator() {
-        System.out.println("getIterator");
-        Troco instance = null;
-        Iterator<PapelMoeda> expResult = null;
-        Iterator<PapelMoeda> result = instance.getIterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Iterator < PapelMoeda > iterator = troco.getIterator();
+        assertEquals(new PapelMoeda(100, 1), iterator.next());
+        assertEquals(new PapelMoeda(20, 1), iterator.next());
+        assertEquals(new PapelMoeda(10, 1), iterator.next());
+        assertEquals(new PapelMoeda(5, 1), iterator.next());
+        assertEquals(new PapelMoeda(2, 1), iterator.next());
+        assertFalse(iterator.hasNext());
     }
-    
+
+    @Test
+    public void testIteratorRemove() {
+        Iterator < PapelMoeda > iterator = troco.getIterator();
+        iterator.next();
+        iterator.remove();
+        assertEquals(new PapelMoeda(20, 1), iterator.next());
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.remove();
+        assertFalse(iterator.hasNext());
+    }
 }
